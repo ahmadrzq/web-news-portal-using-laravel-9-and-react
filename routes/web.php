@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,6 +16,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [NewsController::class, 'index']);
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
@@ -22,13 +24,6 @@ Route::get('/welcome', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/', function () {
-    return Inertia::render('Homepage', [
-        'title' => "AOVerse",
-        'description' => "Welcome to AOV Universe",
     ]);
 });
 
@@ -42,4 +37,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
