@@ -19,7 +19,7 @@ class NewsFactory extends Factory
         return [
             'title' => fake()->words(rand(3,6), true),
             'description' => fake()->paragraph(2, true),
-            'category' => fake()->word(),
+            'category' => fake()->words(rand(1,2),true),
             'author' => fake()->name(),
         ];
     }
