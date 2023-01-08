@@ -56,4 +56,10 @@ class NewsController extends Controller
         $news->save();
         return redirect()->back()->with('message', 'News has been Added');
     }
+
+    public function destroy(Request $request){
+        $news = News::find($request->id);
+        $news->delete();
+        return redirect()->back()->with('message', 'News has been Deleted');
+    }
 }

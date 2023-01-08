@@ -61,7 +61,9 @@ export default function Dashboard(props) {
                                         <div className="badge badge-info">
                                             <Link href={route('edit.news')} data={{ id: news.id }} as="button">Edit</Link>
                                         </div>
-                                        <div className="badge badge-error">Delete</div>
+                                        <div className="badge badge-error">
+                                            <Link href={route('delete.news')} data={{ id: news.id }} method="delete" as="button">Delete</Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>)

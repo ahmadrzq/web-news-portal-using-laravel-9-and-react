@@ -21,7 +21,6 @@ export default function EditNews(props) {
     useEffect(() => {
         { !props.news && Inertia.get('/news/edit') }
     })
-    console.log('props edit : ', props);
     return (
         <div className='min-h-screen bg-indigo-200'>
             <Head title={props.title}></Head>
