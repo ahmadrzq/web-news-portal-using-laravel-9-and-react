@@ -67,7 +67,9 @@ export default function Dashboard(props) {
                             <div>
                                 <span>You don't have a news</span>
                             </div>
-                        </div>}
+                        </div>
+                    }
+
 
                 </div>
             </div>

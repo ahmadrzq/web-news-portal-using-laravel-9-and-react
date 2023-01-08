@@ -17,8 +17,8 @@ use Inertia\Inertia;
 |
 */
 Route::get('/', [NewsController::class, 'index']);
-Route::post('/news', [NewsController::class, 'store']);
-Route::get('/news', [NewsController::class, 'show']);
+Route::post('/news', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('store.news');
+Route::get('/news', [NewsController::class, 'show'])->middleware(['auth', 'verified'])->name('create.news');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
