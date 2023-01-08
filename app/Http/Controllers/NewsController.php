@@ -27,6 +27,25 @@ class NewsController extends Controller
         ]);
     }
 
+    public function edit(News $news, Request $request)
+    {
+        return Inertia::render('EditNews', [
+            'news' => $news->find($request->id)
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        News::where('id', $request->id)->update(
+            [
+                'title' => $request->title,
+                'description' => $request->description,
+                'category' => $request->category,
+            ]
+        );
+        return to_route('dashboard');
+    }
+
     public function store(Request $request)
     {
         $news = new News();

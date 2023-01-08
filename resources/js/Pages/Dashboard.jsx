@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from '@inertiajs/inertia';
-import { Head } from '@inertiajs/inertia-react';
+import { Head, Link } from '@inertiajs/inertia-react';
 import { useState, useEffect } from 'react';
 
 export default function Dashboard(props) {
@@ -22,7 +22,6 @@ export default function Dashboard(props) {
 
     useEffect(() => {
         { !props.news && Inertia.get('/news') }
-        console.log('propsnya : ', props);
     })
     return (
         <AuthenticatedLayout
@@ -57,8 +56,12 @@ export default function Dashboard(props) {
                                         <div className="badge badge-secondary">NEW</div>
                                     </h2>
                                     <p>{news.description}</p>
-                                    <div className="card-actions justify-end">
                                         <div className="badge badge-inline">{news.category}</div>
+                                    <div className="card-actions justify-end">
+                                        <div className="badge badge-info">
+                                            <Link href={route('edit.news')} data={{ id: news.id }} as="button">Edit</Link>
+                                        </div>
+                                        <div className="badge badge-error">Delete</div>
                                     </div>
                                 </div>
                             </div>)
