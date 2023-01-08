@@ -11,7 +11,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = new NewsCollection(News::paginate(20));
+        $news = new NewsCollection(News::OrderByDesc('id')->paginate(10));
         return Inertia::render('Homepage', [
             'title' => "AOVerse",
             'description' => "AOV Universe Has Arrived hahahahaha",
@@ -19,7 +19,16 @@ class NewsController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function show(News $news)
+    {
+        $news = News::where('author', auth()->user()->name)->get();
+        return Inertia::render('Dashboard', [
+            'news' => $news
+        ]);
+    }
+
+    public function store(Request $request)
+    {
         $news = new News();
         $news->title = $request->title;
         $news->description = $request->description;

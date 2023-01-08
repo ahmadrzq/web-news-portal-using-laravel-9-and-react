@@ -1,6 +1,6 @@
 const isNews = (news) => {
-    return news.map((data, i) =>{
-        return(
+    return news.map((data, i) => {
+        return (
             <div key={i} className="card w-full lg:w-96 bg-base-100 shadow-xl">
                 <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
                 <div className="card-body">
@@ -21,11 +21,15 @@ const isNews = (news) => {
 
 const noNews = () => {
     return (
-        <div>There is no news</div>
+        <div className="flex justify-center alert alert-error shadow-lg">
+            <div>
+                <span>There is no news</span>
+            </div>
+        </div>
     )
 }
 
-const NewsList = ({news}) => {
+const NewsList = ({ news }) => {
     return !news ? noNews() : isNews(news)
 }
 

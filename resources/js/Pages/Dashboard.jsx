@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from '@inertiajs/inertia';
 import { Head } from '@inertiajs/inertia-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Dashboard(props) {
     const [title, setTitle] = useState('');
@@ -19,6 +19,11 @@ export default function Dashboard(props) {
         setDescription('')
         setCategory('')
     }
+
+    useEffect(() => {
+        { !props.news && Inertia.get('/news') }
+        console.log('propsnya : ', props);
+    })
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -41,6 +46,29 @@ export default function Dashboard(props) {
                     <input type="text" placeholder="Description" className="m-2 input input-bordered w-full " onChange={(description) => setDescription(description.target.value)} value={description} />
                     <input type="text" placeholder="Category" className="m-2 input input-bordered w-full " onChange={(category) => setCategory(category.target.value)} value={category} />
                     <button className='m-2 btn btn-summary' onClick={() => handleSubmit()}>Submit</button>
+                </div>
+                <div className='p-4'>
+                    {props.news && props.news.length > 0 ? props.news.map((news, i) => {
+                        return (
+                            <div key={i} className="m-2 card w-full bg-base-100 shadow-xl" >
+                                <div className="card-body">
+                                    <h2 className="card-title">
+                                        {news.title}
+                                        <div className="badge badge-secondary">NEW</div>
+                                    </h2>
+                                    <p>{news.description}</p>
+                                    <div className="card-actions justify-end">
+                                        <div className="badge badge-inline">{news.category}</div>
+                                    </div>
+                                </div>
+                            </div>)
+                    }) :
+                        <div className="flex justify-center alert alert-error shadow-lg">
+                            <div>
+                                <span>You don't have a news</span>
+                            </div>
+                        </div>}
+
                 </div>
             </div>
         </AuthenticatedLayout>
